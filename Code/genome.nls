@@ -1,0 +1,477 @@
+;; Set up separately from the numbers- function for ease of reading in module
+to genome-char
+  create-genome 1
+ask genome
+[
+  set mass 10000000
+  set radius 30
+  set speed .00000001
+  set last-collision nobody
+  set rxn-reactant nobody
+  set size radius
+  set color 42
+  set shape "starry"
+  set compound-name "genome"
+  set evo-tag []
+  set r-tag []
+  set next-gen-tag 1
+  ]
+
+end
+
+;; Allows genome to produce proteins
+to genome-produce
+  ;; For a-1-n, allowing it to evolve into a super form upon 
+  ;; the evo-probability. The evo-tag provides a memory of this occurence
+  ;; First case is when it did not evolve
+  ifelse ((random-float 1000) >= a-1-n-evo-prob and not member? 1 evo-tag) 
+  [
+    hatch-a-1-n 1
+        [
+          ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-n-char-run
+          ]
+    set performance performance - 4]
+  ;; Second case when it does evolve
+  [
+    ;; Set a record that the evolution has occurred
+    ask self [set evo-tag fput 1 evo-tag]
+    hatch-a-1-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-s-char-run]
+    set performance performance - 4
+    ]
+  ;; Third case is after it evolved
+  if member? 1 evo-tag
+  [ifelse ((random-float 100) >= a-1-s-evo-prob and not member? 1 r-tag)
+    ;;
+  [hatch-a-1-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-s-char-run]
+    set performance performance - 4
+    ]
+  [
+    ask self [set r-tag fput 1 r-tag]
+    hatch-a-1-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-s-char-run]
+    set performance performance - 4
+    
+    hatch-a-1-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-r-char-run]
+    set performance performance - 4
+    ]]
+  if member? 1 r-tag
+  [
+    hatch-a-1-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-s-char-run]
+    set performance performance - 4
+   
+    hatch-a-1-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-1-r-char-run]
+    set performance performance - 4
+    ]
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; a-2-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  ifelse ((random-float 1000) >= a-2-n-evo-prob) 
+  [
+    hatch-a-2-n 1
+        [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-n-char-run
+          ]
+    set performance performance - 4]
+  [
+    ;; Set a record that the evolution has occurred
+    ask self [set evo-tag fput 2 evo-tag]
+    hatch-a-2-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-s-char-run
+    ]
+    set performance performance - 6
+    ]
+  if member? 2 evo-tag
+   [ifelse ((random-float 100) >= a-2-s-evo-prob and not member? 2 r-tag)
+    
+  [hatch-a-2-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-s-char-run]
+    set performance performance - 4
+    ]
+  [
+    ask self [set r-tag fput 2 r-tag]
+    hatch-a-2-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-s-char-run]
+    set performance performance - 4
+    
+    hatch-a-2-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-r-char-run]
+    set performance performance - 4
+    ]]
+     if member? 2 r-tag
+  [
+    hatch-a-2-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-s-char-run]
+    set performance performance - 4
+   
+    hatch-a-2-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-2-r-char-run]
+    set performance performance - 4
+    ]
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; a-3-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+    ifelse ((random-float 1000) >= a-3-n-evo-prob and not member? 3 evo-tag) 
+  [
+    hatch-a-3-n 1
+        [    
+          ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-n-char-run
+          ]
+    set performance performance - 4]
+  [
+    ;; Set a record that the evolution has occurred
+    ask self [set evo-tag fput 3 evo-tag]
+    hatch-a-3-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-s-char-run
+      ]
+    set performance performance - 4
+    ]
+  if member? 3 evo-tag
+  [ifelse ((random-float 100) >= a-3-s-evo-prob and not member? 3 r-tag)
+    
+  [hatch-a-3-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-s-char-run]
+    set performance performance - 4
+    ]
+  [
+    ask self [set r-tag fput 3 r-tag]
+    hatch-a-3-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-s-char-run]
+    set performance performance - 4
+    
+    hatch-a-3-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-r-char-run]
+    set performance performance - 4
+    ]]
+    if member? 3 r-tag
+  [
+    hatch-a-3-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-s-char-run]
+    set performance performance - 4
+   
+    hatch-a-3-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-3-r-char-run]
+    set performance performance - 4
+    ]
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; a-4-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  
+      ifelse ((random-float 1000) >= a-4-n-evo-prob and not member? 4 evo-tag) 
+  [
+    hatch-a-4-n 1
+        [   
+           ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-n-char-run
+          ]
+    set performance performance - 4]
+  [
+    ;; Set a record that the evolution has occurred
+    ask self [set evo-tag fput 4 evo-tag]
+    hatch-a-4-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-s-char-run
+    ]
+    set performance performance - 4
+    ]
+  if member? 4 evo-tag
+  [ifelse ((random-float 100) >= a-4-s-evo-prob and not member? 4 r-tag)
+    
+  [hatch-a-4-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-s-char-run]
+    set performance performance - 4
+    ]
+  [
+    ask self [set r-tag fput 4 r-tag]
+    hatch-a-4-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-s-char-run]
+    set performance performance - 4
+    
+    hatch-a-4-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-r-char-run]
+    set performance performance - 4
+    ]]
+    if member? 4 r-tag
+  [
+    hatch-a-4-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-s-char-run]
+    set performance performance - 4
+   
+    hatch-a-4-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-4-r-char-run]
+    set performance performance - 4
+    ]
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; a-5-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  
+      ifelse ((random-float 1000) >= a-5-n-evo-prob and not member? 5 evo-tag) 
+  [
+    hatch-a-5-n 1
+        [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-n-char-run
+          ]
+    set performance performance - 4]
+  [
+    ;; Set a record that the evolution has occurred
+    ask self [set evo-tag fput 5 evo-tag]
+    hatch-a-5-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-s-char-run]
+    set performance performance - 4
+    ]
+  if member? 5 evo-tag
+  [ifelse ((random-float 100) >= a-5-s-evo-prob and not member? 5 r-tag)
+    
+  [hatch-a-5-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-s-char-run]
+    set performance performance - 4
+    ]
+  [
+    ask self [set r-tag fput 5 r-tag]
+    hatch-a-5-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-s-char-run]
+    set performance performance - 4
+    
+    hatch-a-5-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-r-char-run]
+    set performance performance - 4
+    ]]
+    if member? 5 r-tag
+  [
+    hatch-a-5-s 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-s-char-run]
+    set performance performance - 4
+   
+    hatch-a-5-r 1
+    [
+    ;; Any changes with mutation probability occurs here
+    set mut-prob-run 100
+    ;; Any changes with the birth-mut-prob should happen here
+    birth-mut-action
+    a-5-r-char-run]
+    set performance performance - 4
+    ]
+end
+
+
+
+;;; HERE IS THE ALTERED MUT-ORB RUN!!!!! ;;;
+;; This is for changing the global variables mutation-gamma-dist
+;; and changing the global counter for length of mutations
+to birth-mut-global
+if birth-mut-counter >= 1
+[
+;; setting new lambda conditions...?
+]
+if birth-mut-counter >= 6
+[set birth-mut-counter 0
+  ;; setting it back to normal
+  
+]
+end
+
+to birth-mut-counter-proc
+  if birth-mut-counter >= 1
+[set birth-mut-counter (birth-mut-counter + 1)]
+end
+
+;; This is turtle specific for all the newly produced proteins, and allows a
+;; greater chance of mutations occuring within the birth mut period
+to birth-mut-action
+if birth-mut-counter >= 1
+[set mut-prob-run 100]
+if birth-mut-counter >= 6
+[set mut-prob-run 0
+  set birth-mut-counter 0]
+end
+
+;; High parameter = high likelihood of evo
+to genome-evo
+set a-1-n-evo-prob 0
+set a-2-n-evo-prob 0
+set a-3-n-evo-prob 0
+set a-4-n-evo-prob 0
+set a-5-n-evo-prob 0
+end
+
+to genome-r
+set a-1-s-evo-prob 0
+set a-2-s-evo-prob 0
+set a-3-s-evo-prob 0
+set a-4-s-evo-prob 0
+set a-5-s-evo-prob 0
+end
+
