@@ -1,0 +1,351 @@
+;; Reaction File
+
+;; Please copy and paste the first reaction as a template if you are making your own reaction.
+;; Change the name of the reactant (read: substrate) in the ifelse line and create a new dissociate and form
+;; -complex function
+;; in the enzyme-kinetics file. Follow those instructions.
+;; Otherwise, leave everything the same.
+
+;; Add the rxn function to the designated place in the go function.
+;; Remember, add a rxn-prob in the molecule-chars function as well!
+
+;; For additions to rxns, change the substrate-here in second line of code and
+;; rename the form-complex function
+
+to a-1-n-&-sub-rxn
+;; Complex formation
+
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other turtle itself now
+  set rxn-reactant one-of substrate-here
+  ;; If no other turtle in area, then rxn-reactant = nobody
+  if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-1-n-here != nobody [ask other a-1-n-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+  ;; sets rxn-reactant as the original turtle now
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      ;; rxn-type differentiates this reaction with other possible a-1-n reactions
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a1-&-s 
+    ;; Product formation. dissociate inputs = [ bind-time original-mass original-radius]
+    ;; If a change is made here, please reflect the change in the above dissociate function as well
+end
+
+;; a-2-n and mod-a-1-n
+to a-2-n-&-mod-a-1-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-1-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-2-n-here != nobody [ask other a-2-n-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a2-&-mod-a1 
+end
+
+;; a-3-n and mod-a-2-n
+to a-3-n-&-mod-a-2-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-2-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-3-n-here != nobody [ask other a-3-n-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a3-&-mod-a2 
+end
+
+;; a-4-n and mod-a-3-n
+to a-4-n-&-mod-a-3-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-3-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-4-n-here != nobody [ask other a-4-n-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a4-&-mod-a3 
+end
+
+;; a-5-n and mod-a-4-n
+to a-5-n-&-mod-a-4-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-4-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-5-n-here [ask other a-5-n-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a5-&-mod-a4 
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; A-#-S
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;a-1-s
+to a-1-s-&-mod-a-2-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-2-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-1-s-here [ask other a-1-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 2]
+    [ set rxn-reactant nobody stop]
+    form-complex-a1s-&-mod-a2 
+end
+
+to a-1-s-&-sub-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of substrate-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-1-s-here [ask other a-1-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a1s-&-sub 
+end
+
+;;a2s
+to a-2-s-&-mod-a-3-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-3-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-2-s-here [ask other a-2-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 2]
+    [ set rxn-reactant nobody stop]
+    form-complex-a2s-&-mod-a3 
+end
+
+to a-2-s-&-mod-a1-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-1-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-2-s-here [ask other a-2-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a2s-&-mod-a1 
+end
+
+;;a3
+to a-3-s-&-mod-a-4-n-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-4-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-3-s [ask other a-3-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 2]
+    [ set rxn-reactant nobody stop]
+    form-complex-a3s-&-mod-a4 
+end
+
+to a-3-s-&-mod-a2-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-2-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-3-s-here [ask other a-3-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a3s-&-mod-a2 
+end
+
+;a4
+to a-4-s-&-sub-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of substrate-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-4-s [ask other a-4-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 2]
+    [ set rxn-reactant nobody stop]
+    form-complex-a4s-&-sub 
+end
+
+to a-4-s-&-mod-a3-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-3-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-4-s-here [ask other a-4-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a4s-&-mod-a-3 
+end
+
+;; a-5-s
+
+to a-5-s-&-mod-a4-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-4-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-5-s-here [ask n-of (count a-5-s-here - 1) a-5-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a5s-&-mod-a-4 
+end
+
+
+to a-5-s-&-mod-a1-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-1-n-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-5-s-here [ask n-of (count a-5-s-here - 1) a-5-s-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 2]
+    [ set rxn-reactant nobody stop]
+    form-complex-a5s-&-mod-a-1 
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; A-#-r
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+to a-1-r-&-sub-s-rxn
+;; Complex formation
+
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other turtle itself now
+  set rxn-reactant one-of substrate-s-here
+  ;; If no other turtle in area, then rxn-reactant = nobody
+  if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-1-r-here != nobody [ask other a-1-r-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+  ;; sets rxn-reactant as the original turtle now
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      ;; rxn-type differentiates this reaction with other possible a-1-n reactions
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a1r-&-s-s
+    ;; Product formation. dissociate inputs = [ bind-time original-mass original-radius]
+    ;; If a change is made here, please reflect the change in the above dissociate function as well
+end
+
+;; a-2-n and mod-a-1-n
+to a-2-r-&-mod-a-1-s-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-1-s-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-2-r-here != nobody [ask other a-2-r-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a2r-&-mod-a-1-s 
+end
+
+;; a-3-n and mod-a-2-n
+to a-3-r-&-mod-a-2-s-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-2-s-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-3-r-here != nobody [ask other a-3-r-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a3r-&-mod-a-2-s 
+end
+
+;; a-4-n and mod-a-3-n
+to a-4-r-&-mod-a-3-s-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-3-s-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if other a-4-r-here != nobody [ask other a-4-r-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a4r-&-mod-a-3-s 
+end
+
+;; a-5-n and mod-a-4-n
+to a-5-r-&-mod-a-4-s-rxn
+  if rxn-reactant != nobody [stop]
+  ;; value of rxn-reactant is the actual other reactant now
+  set rxn-reactant one-of mod-a-4-s-here
+ if rxn-reactant = nobody [ stop ]
+  ;; If another enzyme is present, it stops the function of all but one enzyme
+  if any? other a-5-r-here [ask other a-5-r-here [ stop ] ] 
+  ;; Determines the reactant for this reaction. random-float and rxn-prob determines % of reaction success
+  ifelse ((random-float 100) <= rxn-prob)
+    [ ask rxn-reactant [ set rxn-reactant myself ]
+      set rxn-type 1]
+    [ set rxn-reactant nobody stop]
+    form-complex-a5r-&-mod-a-4-s 
+end

@@ -1,0 +1,83 @@
+;; Used for collecting data. File must be saved in a .csv file to be analyzed
+
+
+;; opens file for the data to be saved into
+to new-file
+  let file user-new-file
+  if is-string? file
+  [
+; if file-exists? file
+;    [file-delete file]
+    file-open file
+    ;; Need to print the headers
+    file-print csv:to-row 
+    (
+      list "Ticks" "ID" "Compound name" "evo-tag" "generations" "performance-1" 
+      "performance-2" "performance" "reaction_total_type-1" "reaction_total_type-2"
+      )
+    write-to-file
+  ]
+end
+
+;; allows turtle data to be written in the new file
+to write-to-file
+  
+  ;; use SORT so the turtles print their data in order by who number,
+  ;; rather than in random order
+  foreach sort turtles [
+    ask ? [
+      file-print csv:to-row get-vals
+    ]
+  ]
+  file-print ""  ;; blank line
+end
+
+;; obtains data from the turtles
+to-report get-vals
+  report 
+  (list ticks who compound-name evo-tag generations performance-1 performance-2
+    performance
+    rxn-1-counter rxn-2-counter    
+    )
+end
+;; A dead turtle will retain its ID, thus no function is necessary to compensate for a 'lost' ID from
+;; a dead turtle. New turtles will have the next highest ID of all turtles prior to the turtle's death.
+
+;; Reports the number of reactions that the agent type has done
+to-report rxn-1-counter 
+if breed = a-1-n
+  [report sum [rxn-tot-1] of a-1-n]
+if breed = a-2-n
+  [report sum [rxn-tot-1] of a-2-n]
+if breed = a-3-n
+  [report sum [rxn-tot-1] of a-3-n]
+if breed = a-4-n
+  [report sum [rxn-tot-1] of a-4-n]
+if breed = a-5-n
+  [report sum [rxn-tot-1] of a-5-n]
+if breed = a-1-s
+  [report sum [rxn-tot-1] of a-1-s]
+if breed = a-2-s
+  [report sum [rxn-tot-1] of a-2-s]
+if breed = a-3-s
+  [report sum [rxn-tot-1] of a-3-s]
+if breed = a-4-s
+  [report sum [rxn-tot-1] of a-4-s]
+if breed = a-5-s
+  [report sum [rxn-tot-1] of a-5-s]
+  report 0
+end
+
+to-report rxn-2-counter 
+if breed = a-1-s
+  [report sum [rxn-tot-2] of a-1-s]
+if breed = a-2-s
+  [report sum [rxn-tot-2] of a-2-s]
+if breed = a-3-s
+  [report sum [rxn-tot-2] of a-3-s]
+if breed = a-4-s
+  [report sum [rxn-tot-2] of a-4-s]
+if breed = a-5-s
+  [report sum [rxn-tot-2] of a-5-s]
+  report 0
+end

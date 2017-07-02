@@ -1,0 +1,606 @@
+;; Molecule Characteristics
+;; Assuming independent mutations
+
+
+;; NUMBER OF AGENTS
+;; Change the initial number of agents HERE
+;; NOTE: If the radius is changed, please change the radius in
+;;       the CHARACTERISTICS OF AGENTS functions as well!
+to number-of-agents
+  create-substrate 300
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-1-n 30
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-2-n 30
+    [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-3-n 30
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-4-n 30
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-5-n 30
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-mod-a-1-n 300
+  [
+  setxy random-xcor random-ycor
+  set radius 3 
+  ]
+  create-mod-a-2-n 300
+  [
+  setxy random-xcor random-ycor
+  set radius 3 
+  ]
+  create-mod-a-3-n 300
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-mod-a-4-n 300
+  [
+  setxy random-xcor random-ycor
+  set radius 3
+  ]
+  create-a-1-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-a-2-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-a-3-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]  
+  create-a-4-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]  
+  create-a-5-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-a-1-r 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-a-2-r 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-a-3-r 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]  
+  create-a-4-r 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]  
+  create-a-5-r 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+  ]
+  create-substrate-s 0
+  [
+    set radius 3
+    setxy random-xcor random-ycor
+    ]
+end
+
+;; CHARACTERISTICS OF AGENTS
+;; Change the characteristics of agents HERE
+;; NOTE: If the radius is changed, please change the radius in
+;;       the number-of-agents function as well!
+
+to substrate-char
+  ask substrate[
+  set mass 1
+  set radius 3 
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "substrate"
+  set color 4
+  set shape "circle"
+  ]
+end
+
+;;a-#-n
+
+to a-1-n-char
+  ask a-1-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  set rxn-reactant nobody
+  kinetic
+  set size radius
+  set compound-name "a-1-n"  
+  set shape "square 2"
+  set color 15
+  set rxn-prob 60
+  set performance-1 10
+  ]
+end
+
+to a-2-n-char
+  ask a-2-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-2-n"  
+  set shape "square 2"
+  set color 25
+  set rxn-prob 60
+  set performance-1 -1
+  ]
+end
+
+to a-3-n-char
+  ask a-3-n[
+  set mass 1
+  set radius 4
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-3-n"  
+  set shape "square 2"
+  set color 35
+  set rxn-prob 60
+  set performance-1 10
+  ;;allo-state-a-3-n
+  ]
+end
+
+to a-4-n-char
+  ask a-4-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-4-n"  
+  set shape "square 2"
+  set color 45
+  set rxn-prob 60
+  set performance-1 -1
+  ]
+end
+
+to a-5-n-char
+  ask a-5-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-5-n"  
+  set shape "square 2"
+  set color 55
+  set rxn-prob 60
+  set performance-1 10
+  ]
+end
+
+;mod-a-#-n
+
+to mod-a-1-n-char
+  ask mod-a-1-n[
+  set mass 1
+  set radius 3 
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "mod-a-1-n"  
+  set shape "circle 2"
+  set color 65
+  ]
+end
+
+to mod-a-2-n-char
+  ask mod-a-2-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "mod-a-2-n"  
+  set shape "circle 2"
+  set color 85
+  ]
+end
+
+to mod-a-3-n-char
+  ask mod-a-3-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "mod-a-3-n"  
+  set shape "circle 2"
+  set color 105
+  ]
+end
+
+to mod-a-4-n-char
+  ask mod-a-4-n[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "mod-a-4-n" 
+  set shape "circle 2"
+  set color 125
+  ]
+end
+
+;; a-#-s
+
+to a-1-s-char
+  ask a-1-s[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-1-s"  
+  set shape "box"
+  set color 15
+  set rxn-prob 60
+  set performance-1 10
+  set performance-2 10
+  ]
+end
+
+to a-2-s-char
+  ask a-2-s[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-2-s"  
+  set shape "box"
+  set color 25
+  set rxn-prob 60
+  set performance-1 -1
+  set performance-2 -1
+  ]
+end
+
+
+to a-3-s-char
+  ask a-3-s[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-3-s"  
+  set shape "box"
+  set color 35
+  set rxn-prob 60
+  set performance-1 10
+  set performance-2 10
+  ]
+end
+
+
+to a-4-s-char
+  ask a-4-s[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-4-s"
+  set shape "box"
+  set color 45
+  set rxn-prob 60
+  set performance-1 -1
+  set performance-2 -1
+  ]
+end
+
+
+to a-5-s-char
+  ask a-5-s[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-5-s"
+  set shape "box"
+  set color 55
+  set rxn-prob 60
+  set performance-1 10
+  set performance-2 10
+  ]
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Related enzymes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to a-1-r-char
+  ask a-1-r[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-1-r"  
+  set shape "box"
+  set color 15
+  set rxn-prob 60
+  set performance-1 10
+  ]
+end
+
+to a-2-r-char
+  ask a-2-r[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-2-r"  
+  set shape "box"
+  set color 25
+  set rxn-prob 60
+  set performance-1 -1
+  ]
+end
+
+
+to a-3-r-char
+  ask a-3-r[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-3-r"  
+  set shape "box"
+  set color 35
+  set rxn-prob 60
+  set performance-1 10
+  ]
+end
+
+
+to a-4-r-char
+  ask a-4-r[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-4-r"
+  set shape "box"
+  set color 45
+  set rxn-prob 60
+  set performance-1 -1
+  ]
+end
+
+
+to a-5-r-char
+  ask a-5-r[
+  set mass 1
+  set radius 3
+  set speed init-speed
+  set last-collision nobody
+  kinetic
+  set size radius
+  set compound-name "a-5-r"
+  set shape "box"
+  set color 55
+  set rxn-prob 60
+  set performance-1 10
+  ]
+end
+
+;;;;;;;;;;;;;;;;;;
+;;  Modified     ;
+;;  a-#-s init   ;
+;;;;;;;;;;;;;;;;;;
+
+
+to mod-a-1-s-char-i
+  ask mod-a-1-s[
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-1-s"  
+set shape "triangle 2"
+set color 105
+  ]
+end
+
+to mod-a-2-s-char-i
+  ask mod-a-2-s [
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-2-s"  
+set shape "triangle 2"
+set color 125]
+end
+
+to mod-a-3-s-char-i
+  ask mod-a-3-s [
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-3-s"
+set shape "triangle 2"
+set color 11]
+end
+
+to mod-a-4-s-char-i
+  ask mod-a-4-s [
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-4-s"
+set shape "triangle 2"
+set color 31]
+end
+
+
+to substrate-s-char-i
+  ask substrate-s [
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-4-s"
+set shape "triangle 2"
+set color 8]
+end
+
+;;;;;;;;;;;;;;;;;;
+;;  Modified     ;
+;;  a-#-s    ;
+;;;;;;;;;;;;;;;;;;
+
+;; mod-a-#-s
+
+to mod-a-1-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-1-s"  
+set shape "triangle 2"
+set color 105
+end
+
+to mod-a-2-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-2-s"  
+set shape "triangle 2"
+set color 125
+end
+
+to mod-a-3-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-3-s"
+set shape "triangle 2"
+set color 11
+end
+
+to mod-a-5-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-5-s"
+set shape "triangle 2"
+set color 51
+end
+
+to mod-a-4-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-4-s"
+set shape "triangle 2"
+set color 31
+end
+
+
+to substrate-s-char
+set mass 1
+set radius 3
+set speed init-speed
+set last-collision nobody
+kinetic
+set size radius
+  set compound-name "mod-a-4-s"
+set shape "triangle 2"
+set color 8
+end
