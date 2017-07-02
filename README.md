@@ -15,3 +15,7 @@ demonstrates the effects of paralogous genes, gain-of-function mutations, and mu
 biochemical pathway. Here, paralogous genes and gain-of-function mutations allow recovery of the proto-cell from otherwise fatal 
 environmental conditions, whereas the greater variance from a greater likelihood and strength of mutations often kill off a large 
 degree of the proto-cells.
+
+## Using the code
+
+This model was created in NetLogo 5.3.1, which is not the latest version of NetLogo. NetLogo does not support backwards compatability in its later iterations, so it is necessary to download 5.3.1 rather than the 6.0.1 version. To open and implement the model, use the .nlogo file. The .nls files are supplementary modules that are necessary to the model's functionality and must also be downloaded. The Enzyme_addition.txt file provides instructions on how to add a new type of agent (molecule) to the simulation.
